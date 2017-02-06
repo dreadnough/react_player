@@ -1,21 +1,16 @@
-import React from 'react';
-import Sound from 'react-sound';
+import React, { PropTypes, Component } from 'react';
+import classnames from 'classnames';
 
-class Stream extends React.Component {
+export default class Music1 extends Component {
 
-render () {
-    return (
-        <div className="scotch_music">
-          <Sound
-           url={this.prepareUrl(this.state.track.stream_url)}
-           playStatus={this.state.playStatus}
-           onPlaying={this.handleSongPlaying.bind(this)}
-           playFromPosition={this.state.playFromPosition}
-           onFinishedPlaying={this.handleSongFinished.bind(this)}/>
-        </div>
-    );
-}
+    render() {
+        const{className,...props}=this.props;
+        return (
+            <div className={classnames('Music', className)}{...props}>
+                <audio class="myAudio" src={this.props.name} autoplay controls />
+            </div>
+        )
+    }
 
 }
 
-export default Stream;
