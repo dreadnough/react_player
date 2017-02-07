@@ -1,0 +1,5 @@
+"homepage": "https://dreadnough.github.io/react_player",
+
+ "deploy": "npm run build&&gh-pages -d build",
+
+  "start": "react-scripts start", 

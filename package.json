@@ -6,7 +6,8 @@
     "gh-pages": "^0.12.0",
     "react-scripts": "0.8.5"
   },
-  "homepage": "https://dreadnough.github.io/react_player",
+  "main": "server/server.js",
+  
   "dependencies": {
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
@@ -22,10 +23,7 @@
     "react-sound": "^0.5.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "deploy": "npm run build&&gh-pages -d build",
+    "start": "node server/server.js",   
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
-}
