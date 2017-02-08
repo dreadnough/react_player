@@ -4,8 +4,8 @@ import './App.css';
 import classnames from 'classnames';
 // import ReactAudioPlayer from 'react-audio-player';
 // import Stream from '../Stream/stream';
- import MusicPlayer from '../MusicPlayer/index';
- import MusicList from '../MusicList/index';
+  import MusicPlayer from '../MusicPlayer/index';
+// import MusicList from '../MusicList/index';
 
 
 class App extends Component {
@@ -18,7 +18,6 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <MusicPlayer/>
-        <MusicList/>
       </div>
     );
   }

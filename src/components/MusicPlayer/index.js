@@ -9,6 +9,7 @@ import Player from '../MusicPlayerComponents/player';
 import Progress from '../MusicPlayerComponents/progress';
 import Footer from '../MusicPlayerComponents/footer';
 
+
 let songs = [{
   "stream_url": 'http://tegos.kz/new/mp3_full/Redfoo_-_New_Thang.mp3',
   "title": "New Thang"
@@ -35,22 +36,28 @@ let songs = [{
 }
 ];
 
+
 export default class Music extends Component {
   constructor(props) {
     super(props);
     this.client_id = 'need  to wait for real client id';
     this.state = {
       track: { stream_url: '', title: '', artwork_url: '' },
+      musicList: [],
       playStatus: Sound.status.STOPPED,
       elapsed: '00:00',
       total: '00:00',
       position: 0,
       playFromPosition: 0,
-      autoCompleteValue: ''
+      autoCompleteValue: '',
+      currentSong: 0,
+      title: '',
+      index: ''
     }
   }
 
   componentDidMount() {
+    this.setState({ musicList: songs });
     this.randomTrack();
   }
 
@@ -86,9 +93,9 @@ export default class Music extends Component {
     this.setState({ playFromPosition: this.state.playFromPosition -= 1000 * 10 });
   }
 
-  handleSelect(value, item) {
-    this.setState({ autoCompleteValue: value, track: item });
-  }
+  // handleSelect(value, item) {
+  //   this.setState({ autoCompleteValue: value, track: item });
+  // }
 
   handleSongPlaying(audio) {
     this.setState({
@@ -117,9 +124,19 @@ export default class Music extends Component {
   }
 
   handleSongFinished() {
-    // Call random Track
-    this.randomTrack();
+    this.nextTrack();
   }
+
+  nextTrack() {
+    let currentSong = this.state.currentSong + 1;
+    if ((songs.length - 1) < currentSong) {
+      currentSong = 0;
+    }
+    this.setState({ track: songs[currentSong] });
+    this.setState({ currentSong })
+
+  }
+
   randomTrack() {
     // console.log('here');
     // let _this = this;
@@ -135,13 +152,32 @@ export default class Music extends Component {
     //   });
     const songsLength = songs.length;
     const randomNumber = Math.floor((Math.random() * songsLength) + 1);
-    this.setState({ track: songs[randomNumber] });
+    this.setState({ track: songs[0] });
 
   }
+
+  changeMusic() {
+    this.setState({ track: songs[this.state.index || 0] });
+  }
+
+
+  handleSelect(index) {
+    this.setState({ track: songs[index] });
+  }
+
 
   render() {
     return (
       <div className="music">
+        <div>
+          <ul>
+            {this.state.musicList.map((music, index) => {
+              return (
+                <li onClick={this.handleSelect.bind(this, index)} key={index}>{music.title}</li>
+              )
+            })}
+          </ul>
+        </div>
         <Details
           title={this.state.track.title} />
         <Sound

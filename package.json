@@ -23,7 +23,8 @@
     "react-sound": "^0.5.2"
   },
   "scripts": {
-    "start": "node server/server.js",   
+    "start": "node server/server.js",  
+    "start2": "react-scripts start",   
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
